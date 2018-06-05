@@ -18,7 +18,7 @@ import hztywl.com.chat.bean.MessageInfo;
 
 /**
  * Created by ${梅鹏} on 2018/1/27.
- *
+ * 聊天适配器
  * @author meipeng
  */
 
