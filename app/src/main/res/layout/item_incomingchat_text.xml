@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="left|center_vertical"
+    android:padding="@dimen/dp_10">
+
+    <ImageView
+        android:id="@+id/iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:src="@mipmap/ic_launcher_round" />
+
+    <com.github.library.bubbleview.BubbleTextVew xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/tv_in_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="50dp"
+        android:gravity="left|center_vertical"
+        android:minHeight="40dp"
+        android:paddingBottom="6dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="6dp"
+        android:text="@string/activity_chatting_fullscreen_resolved_title"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_16"
+        app:angle="4dp"
+        app:arrowHeight="13dp"
+        app:arrowLocation="left"
+        app:arrowPosition="14dp"
+        app:arrowWidth="8dp"
+        app:bubbleColor="@color/with" />
+
+</LinearLayout>
+
