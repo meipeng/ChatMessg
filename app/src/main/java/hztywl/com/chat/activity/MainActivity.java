@@ -12,9 +12,11 @@ import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import hztywl.com.chat.R;
+import hztywl.com.chat.activity.fragment.ContactsFragment;
+import hztywl.com.chat.activity.fragment.MainMessageFragment;
+import hztywl.com.chat.activity.fragment.MyFragment;
 import hztywl.com.chat.util.TabEntity;
 
 /**
@@ -43,7 +45,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void initView() {
         for (String title : mTitles) {
-            mFragments.add(SimpleCardFragment.getInstance("Switch ViewPager " + title));
+            mFragments.add(MainMessageFragment.getInstance("Switch ViewPager " + title));
+            mFragments.add(ContactsFragment.getInstance("Switch ViewPager " + title));
+            mFragments.add(MyFragment.getInstance("Switch ViewPager " + title));
         }
 
         for (int i = 0; i < mTitles.length; i++) {
@@ -58,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void tagLayout() {
         mTabLayout.setTabData(mTabEntities);
-        final Random mRandom = new Random();
         mTabLayout.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelect(int position) {
@@ -67,12 +70,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTabReselect(int position) {
-                if (position == 0) {
-                    mTabLayout.showMsg(0, mRandom.nextInt(100) + 1);
-                }
             }
         });
-
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -87,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
             public void onPageScrollStateChanged(int state) {
             }
         });
-        mViewPager.setCurrentItem(1);
     }
 
     private class MyPagerAdapter extends FragmentPagerAdapter {

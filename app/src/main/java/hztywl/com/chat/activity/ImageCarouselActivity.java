@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hztywl.com.chat.R;
-import hztywl.com.chat.SampleApplicationLike;
+import hztywl.com.chat.application.SampleApplicationLike;
 import hztywl.com.chat.bean.MessageImage;
 import hztywl.com.chat.bean.MessageInfo;
 

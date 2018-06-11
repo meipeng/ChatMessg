@@ -28,12 +28,14 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.listener.FindListener;
 import cn.dreamtobe.kpswitch.util.KPSwitchConflictUtil;
 import cn.dreamtobe.kpswitch.util.KeyboardUtil;
 import cn.dreamtobe.kpswitch.widget.KPSwitchPanelLinearLayout;
 import hztywl.com.chat.R;
-import hztywl.com.chat.SampleApplicationLike;
 import hztywl.com.chat.adapter.ChatMessageAdapter;
+import hztywl.com.chat.application.SampleApplicationLike;
 import hztywl.com.chat.bean.MessageImage;
 import hztywl.com.chat.bean.MessageInfo;
 import hztywl.com.chat.util.BitmapUtil;
@@ -55,10 +57,6 @@ public class ChatActivity extends AppCompatActivity implements
      * 拍照
      */
     public static final int REQUEST_CODE_SELECT = 100;
-    /**
-     * 相册工具
-     */
-    private ImagePicker mImagePicker;
     /**
      * 消息显示列表
      */
@@ -86,6 +84,27 @@ public class ChatActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_chat);
         initView();
         initOnClick();
+        initData();
+    }
+
+    private void initData() {
+        BmobQuery<MessageInfo> bmobQuery = new BmobQuery<>();
+        //按照时间降序
+        bmobQuery.order("-createdAt");
+        //执行查询，第一个参数为上下文，第二个参数为查找的回调
+        bmobQuery.findObjects(this, new FindListener<MessageInfo>() {
+            @Override
+            public void onSuccess(List<MessageInfo> losts) {
+            }
+
+            @Override
+            public void onError(int code, String arg0) {
+            }
+        });
+
+        //加载数据
+        messageAdapter = new ChatMessageAdapter(this, getData());
+        recyclerViewChat.setAdapter(messageAdapter);
     }
 
 
@@ -156,8 +175,6 @@ public class ChatActivity extends AppCompatActivity implements
 
     @SuppressLint("ClickableViewAccessibility")
     private void initView() {
-
-
         recyclerViewChat = (RecyclerView) findViewById(R.id.rl_chat);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerViewChat.setLayoutManager(layoutManager);
@@ -176,9 +193,6 @@ public class ChatActivity extends AppCompatActivity implements
         mPlusTv = (TextView) findViewById(R.id.plus_tv);
 
         mPlusTv.setOnClickListener(this);
-        //加载数据
-        messageAdapter = new ChatMessageAdapter(this, getData());
-        recyclerViewChat.setAdapter(messageAdapter);
         //配置相册
         configureImagePicker();
     }
@@ -187,7 +201,10 @@ public class ChatActivity extends AppCompatActivity implements
      * 配置相册
      */
     private void configureImagePicker() {
-        mImagePicker = ImagePicker.getInstance();
+        /*
+      相册工具
+     */
+        ImagePicker mImagePicker = ImagePicker.getInstance();
         //设置图片加载器
         mImagePicker.setImageLoader(SampleApplicationLike.getGlideLoader());
         //选中数量限制

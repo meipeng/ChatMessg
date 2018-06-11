@@ -2,7 +2,7 @@ package hztywl.com.chat.bean;
 
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 
-import java.io.Serializable;
+import cn.bmob.v3.BmobObject;
 
 /**
  * Created by ${梅鹏} on 2018/1/27.
@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @author meipeng
  */
 
-public class MessageInfo implements Serializable, MultiItemEntity {
+public class MessageInfo extends BmobObject implements MultiItemEntity {
 
     /**
      * 消息类型 文本、图片、语音

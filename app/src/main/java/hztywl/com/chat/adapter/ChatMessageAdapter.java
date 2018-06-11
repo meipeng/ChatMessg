@@ -12,7 +12,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import hztywl.com.chat.R;
-import hztywl.com.chat.SampleApplicationLike;
+import hztywl.com.chat.application.SampleApplicationLike;
 import hztywl.com.chat.activity.ImageCarouselActivity;
 import hztywl.com.chat.bean.MessageInfo;
 

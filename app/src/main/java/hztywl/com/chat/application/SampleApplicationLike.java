@@ -1,4 +1,4 @@
-package hztywl.com.chat;
+package hztywl.com.chat.application;
 
 import android.annotation.TargetApi;
 import android.app.Application;
@@ -52,7 +52,6 @@ public class SampleApplicationLike extends DefaultApplicationLike {
         super.onBaseContextAttached(base);
         // you must install multiDex whatever tinker is installed!
         MultiDex.install(base);
-
         // 安装tinker
         // TinkerManager.installTinker(this); 替换成下面Bugly提供的方法
         Beta.installTinker(this);

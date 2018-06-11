@@ -1,4 +1,4 @@
-package hztywl.com.chat;
+package hztywl.com.chat.application;
 
 import com.tencent.tinker.loader.app.TinkerApplication;
 import com.tencent.tinker.loader.shareutil.ShareConstants;
@@ -11,7 +11,7 @@ import com.tencent.tinker.loader.shareutil.ShareConstants;
 public class SampleApplication extends TinkerApplication {
 
     public SampleApplication() {
-        super(ShareConstants.TINKER_ENABLE_ALL, "hztywl.com.chat.SampleApplicationLike",
+        super(ShareConstants.TINKER_ENABLE_ALL, "hztywl.com.chat.application.SampleApplicationLike",
                 "com.tencent.tinker.loader.TinkerLoader", false);
     }
 }

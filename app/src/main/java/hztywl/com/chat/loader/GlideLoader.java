@@ -11,7 +11,7 @@ import com.lzy.imagepicker.loader.ImageLoader;
 import java.io.File;
 
 import hztywl.com.chat.R;
-import hztywl.com.chat.SampleApplicationLike;
+import hztywl.com.chat.application.SampleApplicationLike;
 
 /**
  * Created by ${梅鹏} on 2018/2/1.
