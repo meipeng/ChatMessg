@@ -17,6 +17,9 @@ import java.util.Random;
 import hztywl.com.chat.R;
 import hztywl.com.chat.util.TabEntity;
 
+/**
+ * @author meipeng
+ */
 public class MainActivity extends AppCompatActivity {
 
     private ArrayList<Fragment> mFragments = new ArrayList<>();
