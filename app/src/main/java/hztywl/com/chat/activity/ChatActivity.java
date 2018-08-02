@@ -28,20 +28,19 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.listener.FindListener;
 import cn.dreamtobe.kpswitch.util.KPSwitchConflictUtil;
 import cn.dreamtobe.kpswitch.util.KeyboardUtil;
 import cn.dreamtobe.kpswitch.widget.KPSwitchPanelLinearLayout;
 import hztywl.com.chat.R;
 import hztywl.com.chat.adapter.ChatMessageAdapter;
-import hztywl.com.chat.application.SampleApplicationLike;
+import hztywl.com.chat.application.SampleApplication;
 import hztywl.com.chat.bean.MessageImage;
 import hztywl.com.chat.bean.MessageInfo;
 import hztywl.com.chat.util.BitmapUtil;
 
 /**
  * @author meipeng
+ *         聊天界面
  */
 public class ChatActivity extends AppCompatActivity implements
         View.OnClickListener, View.OnTouchListener {
@@ -88,20 +87,6 @@ public class ChatActivity extends AppCompatActivity implements
     }
 
     private void initData() {
-        BmobQuery<MessageInfo> bmobQuery = new BmobQuery<>();
-        //按照时间降序
-        bmobQuery.order("-createdAt");
-        //执行查询，第一个参数为上下文，第二个参数为查找的回调
-        bmobQuery.findObjects(this, new FindListener<MessageInfo>() {
-            @Override
-            public void onSuccess(List<MessageInfo> losts) {
-            }
-
-            @Override
-            public void onError(int code, String arg0) {
-            }
-        });
-
         //加载数据
         messageAdapter = new ChatMessageAdapter(this, getData());
         recyclerViewChat.setAdapter(messageAdapter);
@@ -206,7 +191,7 @@ public class ChatActivity extends AppCompatActivity implements
      */
         ImagePicker mImagePicker = ImagePicker.getInstance();
         //设置图片加载器
-        mImagePicker.setImageLoader(SampleApplicationLike.getGlideLoader());
+        mImagePicker.setImageLoader(SampleApplication.getGlideLoader());
         //选中数量限制
         mImagePicker.setSelectLimit(IMAGE_SELECTLIMIT);
         // 设置是否裁剪图片
@@ -375,7 +360,7 @@ public class ChatActivity extends AppCompatActivity implements
      */
     private File configureCompress(String imagePath) {
         File compressFile;
-        compressFile = CompressHelper.getDefault(SampleApplicationLike.getContext()).
+        compressFile = CompressHelper.getDefault(SampleApplication.getContext()).
                 compressToFile(new File(imagePath));
         return compressFile;
     }

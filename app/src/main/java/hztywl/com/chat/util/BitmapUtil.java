@@ -18,7 +18,14 @@ import java.util.UUID;
 
 public class BitmapUtil {
 
+    /**
+     * sd卡存放目录
+     */
     private static final String SD_PATH = "/sdcard/hztywl/chatmessg/image/";
+
+    /**
+     *
+     */
     private static final String IN_PATH = "/hztywl/chatmessg/";
 
     /**

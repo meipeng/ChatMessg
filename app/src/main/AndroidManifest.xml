@@ -27,7 +27,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".activity.LoginActivity">
+        <activity
+            android:name=".activity.ChatActivity"
+            android:windowSoftInputMode="adjustResize" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,17 +37,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.MainActivity" />
 
-        <activity
-            android:name=".activity.ChatActivity"
-            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".activity.ImageCarouselActivity" />
-
-        <activity
-            android:name="com.tencent.bugly.beta.ui.BetaActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize|locale"
-            android:theme="@android:style/Theme.Translucent" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -57,22 +50,7 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <!-- 配置APP ID -->
-        <meta-data
-            android:name="BUGLY_APPID"
-            android:value="ff43171412" />
-        <!-- 配置APP版本号 -->
-        <meta-data
-            android:name="BUGLY_APP_VERSION"
-            android:value="1.0" />
-        <!-- 配置APP渠道号 -->
-        <meta-data
-            android:name="BUGLY_APP_CHANNEL"
-            android:value="1.0" />
-        <!-- 配置Bugly调试模式（true或者false） -->
-        <meta-data
-            android:name="BUGLY_ENABLE_DEBUG"
-            android:value="true" />
+
 
     </application>
 

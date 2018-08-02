@@ -11,7 +11,7 @@ import com.lzy.imagepicker.loader.ImageLoader;
 import java.io.File;
 
 import hztywl.com.chat.R;
-import hztywl.com.chat.application.SampleApplicationLike;
+import hztywl.com.chat.application.SampleApplication;
 
 /**
  * Created by ${梅鹏} on 2018/2/1.
@@ -46,31 +46,31 @@ public class GlideLoader implements ImageLoader {
 
 
     public void displayImageCircle(File fileImage, ImageView imageView) {
-        Glide.with(SampleApplicationLike.getContext())
+        Glide.with(SampleApplication.getContext())
                 //设置图片路径(fix #8,文件名包含%符号 无法识别和显示)
                 .load(fileImage)
                 //缓存全尺寸
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .error(R.drawable.imageselector_photo)
                 .placeholder(R.drawable.imageselector_photo)
-                .transform(new GlideCircleTransform(SampleApplicationLike.getContext()))
+                .transform(new GlideCircleTransform(SampleApplication.getContext()))
                 .into(imageView);
     }
 
     public void displayImageRound(File fileImage, ImageView imageView, int round) {
-        Glide.with(SampleApplicationLike.getContext())
+        Glide.with(SampleApplication.getContext())
                 //设置图片路径(fix #8,文件名包含%符号 无法识别和显示)
                 .load(fileImage)
                 //缓存全尺寸
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .error(R.drawable.imageselector_photo)
                 .placeholder(R.drawable.imageselector_photo)
-                .transform(new GlideRoundTransform(SampleApplicationLike.getContext(), round))
+                .transform(new GlideRoundTransform(SampleApplication.getContext(), round))
                 .into(imageView);
     }
 
     public void displayImage(File fileImage, ImageView imageView) {
-        Glide.with(SampleApplicationLike.getContext())
+        Glide.with(SampleApplication.getContext())
                 //设置图片路径(fix #8,文件名包含%符号 无法识别和显示)
                 .load(fileImage)
                 //缓存全尺寸
@@ -82,6 +82,6 @@ public class GlideLoader implements ImageLoader {
 
     @Override
     public void clearMemoryCache() {
-        Glide.get(SampleApplicationLike.getContext()).clearMemory();
+        Glide.get(SampleApplication.getContext()).clearMemory();
     }
 }

@@ -2,8 +2,6 @@ package hztywl.com.chat.bean;
 
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 
-import cn.bmob.v3.BmobObject;
-
 /**
  * Created by ${梅鹏} on 2018/1/27.
  * 消息内容
@@ -11,7 +9,7 @@ import cn.bmob.v3.BmobObject;
  * @author meipeng
  */
 
-public class MessageInfo extends BmobObject implements MultiItemEntity {
+public class MessageInfo  implements MultiItemEntity {
 
     /**
      * 消息类型 文本、图片、语音

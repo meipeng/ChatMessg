@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hztywl.com.chat.R;
-import hztywl.com.chat.application.SampleApplicationLike;
+import hztywl.com.chat.application.SampleApplication;
 import hztywl.com.chat.bean.MessageImage;
 import hztywl.com.chat.bean.MessageInfo;
 
@@ -63,7 +63,7 @@ public class ImageCarouselActivity extends Activity {
                 PhotoView photoView = new PhotoView(ImageCarouselActivity.this);
                 photoView.enable();
                 photoView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-                SampleApplicationLike.getGlideLoader().displayImage(mImageList.get(position).getImageSdFile(), photoView);
+                SampleApplication.getGlideLoader().displayImage(mImageList.get(position).getImageSdFile(), photoView);
                 container.addView(photoView);
                 return photoView;
             }

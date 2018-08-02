@@ -12,8 +12,8 @@ import java.io.Serializable;
 import java.util.List;
 
 import hztywl.com.chat.R;
-import hztywl.com.chat.application.SampleApplicationLike;
 import hztywl.com.chat.activity.ImageCarouselActivity;
+import hztywl.com.chat.application.SampleApplication;
 import hztywl.com.chat.bean.MessageInfo;
 
 /**
@@ -55,7 +55,7 @@ public class ChatMessageAdapter extends BaseMultiItemQuickAdapter<MessageInfo, B
                 break;
             case MessageInfo.OUT_IMG:
 
-                SampleApplicationLike.getGlideLoader().displayImageRound(item.getMessageImage().
+                SampleApplication.getGlideLoader().displayImageRound(item.getMessageImage().
                                 getImageSmallFile(),
                         (ImageView) helper.getView(R.id.iv_out), IMAGE_ROUND_VALUE);
                 helper.getView(R.id.iv_out).setOnClickListener(this);
@@ -66,7 +66,7 @@ public class ChatMessageAdapter extends BaseMultiItemQuickAdapter<MessageInfo, B
 
                 break;
             case MessageInfo.IN_IMG:
-                SampleApplicationLike.getGlideLoader().displayImageRound(item.getMessageImage()
+                SampleApplication.getGlideLoader().displayImageRound(item.getMessageImage()
                         .getImageSmallFile(), (ImageView) helper.getView(R.id.iv_in), 10);
                 break;
             default:
