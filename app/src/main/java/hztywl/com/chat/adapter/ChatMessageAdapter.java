@@ -82,4 +82,11 @@ public class ChatMessageAdapter extends BaseMultiItemQuickAdapter<MessageInfo, B
         }
     }
 
+    /**
+     * 判断消息状态
+     */
+    private void messageState(){
+
+    }
+
 }
