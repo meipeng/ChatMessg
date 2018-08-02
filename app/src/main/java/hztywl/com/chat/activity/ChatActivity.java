@@ -15,6 +15,7 @@ import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -43,7 +44,7 @@ import hztywl.com.chat.util.BitmapUtil;
  *         聊天界面
  */
 public class ChatActivity extends AppCompatActivity implements
-        View.OnClickListener, View.OnTouchListener {
+        View.OnTouchListener, View.OnClickListener {
     /**
      * 设置相册选中最大的数量
      */
@@ -61,9 +62,20 @@ public class ChatActivity extends AppCompatActivity implements
      */
     private RecyclerView recyclerViewChat;
 
+    /**
+     * 展开按钮
+     */
     private ImageView mPlusIv;
+
     private KPSwitchPanelLinearLayout mPanelRoot;
+    /**
+     * 照片、拍照、发送按钮
+     */
     private TextView mSendImgTv, mPanelmgTv, mPlusTv;
+
+    /**
+     * 文字输入框
+     */
     private EditText mSendEdt;
     /**
      * 聊天的适配器
@@ -82,6 +94,7 @@ public class ChatActivity extends AppCompatActivity implements
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
         initView();

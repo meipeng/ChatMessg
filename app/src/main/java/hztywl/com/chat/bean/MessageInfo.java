@@ -2,6 +2,8 @@ package hztywl.com.chat.bean;
 
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 
+import java.io.Serializable;
+
 /**
  * Created by ${梅鹏} on 2018/1/27.
  * 消息内容
@@ -9,7 +11,7 @@ import com.chad.library.adapter.base.entity.MultiItemEntity;
  * @author meipeng
  */
 
-public class MessageInfo  implements MultiItemEntity {
+public class MessageInfo implements MultiItemEntity, Serializable {
 
     /**
      * 消息类型 文本、图片、语音

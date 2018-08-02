@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -29,6 +30,7 @@ public class ImageCarouselActivity extends Activity {
     private ViewPager mPager;
     private List<MessageImage> mImageList = new ArrayList<>();
     private final int PAGER_LIMIT = 1;
+    MessageInfo messageInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +41,7 @@ public class ImageCarouselActivity extends Activity {
 
         List<MessageInfo> messageInfos = (List<MessageInfo>)
                 getIntent().getSerializableExtra("imglist");
-
+        messageInfo = (MessageInfo) getIntent().getSerializableExtra("item");
         getImageData(messageInfos);
 
         if (mImageList.size() > PAGER_LIMIT) {
@@ -73,6 +75,15 @@ public class ImageCarouselActivity extends Activity {
                 container.removeView((View) object);
             }
         });
+
+        for (int i = 0; i < mImageList.size(); i++) {
+            if (messageInfo.getMessageImage().getImageFile().equals(mImageList.get(i).getImageFile())) {
+                mPager.setCurrentItem(i, false);
+                break;
+            }
+        }
+
+        Log.e("msgs", messageInfo.getMessageImage().getImageFile() + "");
     }
 
 

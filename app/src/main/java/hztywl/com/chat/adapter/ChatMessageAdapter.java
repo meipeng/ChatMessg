@@ -19,11 +19,11 @@ import hztywl.com.chat.bean.MessageInfo;
 /**
  * Created by ${梅鹏} on 2018/1/27.
  * 聊天适配器
+ *
  * @author meipeng
  */
 
-public class ChatMessageAdapter extends BaseMultiItemQuickAdapter<MessageInfo, BaseViewHolder>
-        implements View.OnClickListener {
+public class ChatMessageAdapter extends BaseMultiItemQuickAdapter<MessageInfo, BaseViewHolder> {
 
     private Context mContext;
     private final int IMAGE_ROUND_VALUE = 8;
@@ -46,7 +46,7 @@ public class ChatMessageAdapter extends BaseMultiItemQuickAdapter<MessageInfo, B
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, MessageInfo item) {
+    protected void convert(final BaseViewHolder helper, final MessageInfo item) {
 
         switch (helper.getItemViewType()) {
             case MessageInfo.OUT_TEXT:
@@ -58,8 +58,16 @@ public class ChatMessageAdapter extends BaseMultiItemQuickAdapter<MessageInfo, B
                 SampleApplication.getGlideLoader().displayImageRound(item.getMessageImage().
                                 getImageSmallFile(),
                         (ImageView) helper.getView(R.id.iv_out), IMAGE_ROUND_VALUE);
-                helper.getView(R.id.iv_out).setOnClickListener(this);
+                helper.getView(R.id.iv_out).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
 
+                        Intent intent = new Intent(mContext, ImageCarouselActivity.class);
+                        intent.putExtra("imglist", (Serializable) getData());
+                        intent.putExtra("item", item);
+                        mContext.startActivity(intent);
+                    }
+                });
                 break;
             case MessageInfo.IN_TEXT:
                 helper.setText(R.id.tv_in_text, item.getText());
@@ -74,13 +82,4 @@ public class ChatMessageAdapter extends BaseMultiItemQuickAdapter<MessageInfo, B
         }
     }
 
-
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.iv_out) {
-            Intent intent = new Intent(mContext, ImageCarouselActivity.class);
-            intent.putExtra("imglist", (Serializable) getData());
-            mContext.startActivity(intent);
-        }
-    }
 }
