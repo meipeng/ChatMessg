@@ -329,7 +329,7 @@ public class ChatActivity extends AppCompatActivity implements
 
 
     /**
-     * 图片的回调单选或多选
+     * 图片选择器选择图片的回调单选或多选
      *
      * @param requestCode
      * @param resultCode
@@ -391,11 +391,5 @@ public class ChatActivity extends AppCompatActivity implements
                 BitmapUtil.getBitmapOption(IMAGE_SAMPLESIZE));
 
         return new File(BitmapUtil.saveBitmap(this, bitmap));
-    }
-
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
     }
 }
