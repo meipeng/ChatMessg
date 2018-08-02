@@ -70,7 +70,10 @@ public class ChatActivity extends AppCompatActivity implements
      */
     private ChatMessageAdapter messageAdapter;
 
-    private final int ChatMessageAdapterCount = 0;
+    /**
+     * 设置默认聊天消息个数
+     */
+    private final int chatMessageAdapterCount = 10;
     /**
      * 设置原图大小的缩小比例
      */
@@ -217,7 +220,7 @@ public class ChatActivity extends AppCompatActivity implements
      */
     public List<MessageInfo> getData() {
         List<MessageInfo> messageInfoList = new ArrayList<>();
-        for (int i = 0; i < ChatMessageAdapterCount; i++) {
+        for (int i = 0; i < chatMessageAdapterCount; i++) {
             if (i == 0) {
                 MessageInfo messageInfo = new MessageInfo();
                 messageInfo.setItemType(MessageInfo.IN_TEXT);
@@ -242,11 +245,11 @@ public class ChatActivity extends AppCompatActivity implements
                 addMessageText();
                 break;
             case R.id.send_img_tv:
-                //选择照片
+                //发送选择的图片
                 selectionAlbums();
                 break;
             case R.id.panel_img_tv:
-                //拍照
+                //发送拍照的图片
                 startPhotograph();
                 break;
             default:
