@@ -55,8 +55,9 @@ public class MessageInfo implements MultiItemEntity, Serializable {
 
     /**
      * 消息状态  0 成功 1发送中 2，发送失败 3错误
+     * 默认一开始发送；
      */
-    private String messageState;
+    private String messageState = "1";
 
     public String getText() {
         return text;

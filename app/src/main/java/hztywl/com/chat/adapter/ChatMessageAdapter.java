@@ -51,17 +51,18 @@ public class ChatMessageAdapter extends BaseMultiItemQuickAdapter<MessageInfo, B
         switch (helper.getItemViewType()) {
             case MessageInfo.OUT_TEXT:
                 helper.setText(R.id.tv_out_text, item.getText());
-
+                messageState(item.getMessageState(), (ImageView) helper.getView(R.id.ivMessageState));
                 break;
             case MessageInfo.OUT_IMG:
+                messageState(item.getMessageState(), (ImageView) helper.getView(R.id.ivMessageState));
 
                 SampleApplication.getGlideLoader().displayImageRound(item.getMessageImage().
                                 getImageSmallFile(),
                         (ImageView) helper.getView(R.id.iv_out), IMAGE_ROUND_VALUE);
+
                 helper.getView(R.id.iv_out).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
                         Intent intent = new Intent(mContext, ImageCarouselActivity.class);
                         intent.putExtra("imglist", (Serializable) getData());
                         intent.putExtra("item", item);
@@ -84,9 +85,28 @@ public class ChatMessageAdapter extends BaseMultiItemQuickAdapter<MessageInfo, B
 
     /**
      * 判断消息状态
+     * 0 成功 1发送中 2，发送失败 3错误
+     *
+     * @param state   消息状态
+     * @param ivState 控制View消息
      */
-    private void messageState(){
-
+    private void messageState(String state, ImageView ivState) {
+        switch (state) {
+            case "1":
+                ivState.setImageResource(R.drawable.loading);
+                ivState.setVisibility(View.VISIBLE);
+                break;
+            case "2":
+                ivState.setImageResource(R.drawable.loadingerror);
+                ivState.setVisibility(View.VISIBLE);
+                break;
+            case "3":
+                ivState.setImageResource(R.drawable.loadingerror);
+                ivState.setVisibility(View.VISIBLE);
+                break;
+            default:
+                ivState.setVisibility(View.GONE);
+                break;
+        }
     }
-
 }

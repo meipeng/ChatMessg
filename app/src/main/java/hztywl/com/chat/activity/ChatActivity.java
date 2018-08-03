@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -91,10 +93,38 @@ public class ChatActivity extends AppCompatActivity implements
      */
     private final int IMAGE_SAMPLESIZE = 2;
 
+    /**
+     * 模拟消息发送
+     */
+    private int msgWhat;
+
+    @SuppressLint("HandlerLeak")
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what == 1) {
+                //给自己消息发送成功，刷新发送
+                messageAdapter.getData().get(messageAdapter.getItemCount() - 1).setMessageState("0");
+                messageAdapter.notifyItemChanged(messageAdapter.getItemCount() - 1);
+                //模拟对方发送消息
+                MessageInfo messageInfo1 = new MessageInfo();
+                messageInfo1.setItemType(MessageInfo.IN_TEXT);
+                messageInfo1.setText("我接受到了消息了");
+                messageAdapter.addData(messageInfo1);
+            } else {
+                //发送失败
+                messageAdapter.getData().get(messageAdapter.getItemCount() - 1).setMessageState("2");
+                messageAdapter.notifyItemChanged(messageAdapter.getItemCount() - 1);
+            }
+            //消息列表移动到最底部
+            recyclerViewChat.scrollToPosition(messageAdapter.getItemCount() - 1);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //去掉标题栏
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
         initView();
@@ -104,7 +134,7 @@ public class ChatActivity extends AppCompatActivity implements
 
     private void initData() {
         //加载数据
-        messageAdapter = new ChatMessageAdapter(this, getData());
+        messageAdapter = new ChatMessageAdapter(this, null);
         recyclerViewChat.setAdapter(messageAdapter);
     }
 
@@ -274,20 +304,54 @@ public class ChatActivity extends AppCompatActivity implements
      * 发送文字
      */
     private void addMessageText() {
-        MessageInfo messageInfo = new MessageInfo();
+        /*
+          模拟自己发送消息
+         */
+        final MessageInfo messageInfo = new MessageInfo();
         messageInfo.setItemType(MessageInfo.OUT_TEXT);
         messageInfo.setText(mSendEdt.getText().toString());
         messageAdapter.addData(messageInfo);
 
 
-        MessageInfo messageInfo1 = new MessageInfo();
-        messageInfo1.setItemType(MessageInfo.IN_TEXT);
-        messageInfo1.setText(mSendEdt.getText().toString());
-        messageAdapter.addData(messageInfo1);
-
+        //处理消息对话列表和输入框
         recyclerViewChat.scrollToPosition(messageAdapter.getItemCount() - 1);
         mSendEdt.setText("");
+
+        //简单模拟一下网络请求的过程 ，这样写线程不规范，容易导致内测泄漏
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    //模拟延迟2秒接受到消息
+                    Thread.sleep(2000);
+                    Message message = new Message();
+                    message.obj = messageInfo;
+                    //what=1,消息发送成功，消息发送失败
+                    msgWhat++;
+                    if (msgWhat % 2 == 0) {
+                        message.what = 1;
+                    } else {
+                        message.what = 2;
+                    }
+                    mHandler.sendMessage(message);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
+
+
+    /**
+     * 静态的匿名内部类不会持有外部类的引用
+     */
+    private static final Runnable RUNNABLE = new Runnable() {
+        @Override
+        public void run() {
+
+        }
+    };
+
 
     /**
      * 选择相册
@@ -353,22 +417,46 @@ public class ChatActivity extends AppCompatActivity implements
 
 
     /**
+     * 发送图片消息
      * 通过路径添加图片
      *
      * @param path 图片路径
      */
     private void addMessageImage(String path) {
-        MessageInfo messageInfo = new MessageInfo();
+        final MessageInfo messageInfo = new MessageInfo();
         messageInfo.setItemType(MessageInfo.OUT_IMG);
 
         MessageImage messageImage = new MessageImage();
         messageImage.setImageSdFile(new File(path));
         messageImage.setImageFile(configureCompress(path));
-        messageImage.setImageSmallFile(configImageBitmap
-                (messageImage.getImageFile()));
+        messageImage.setImageSmallFile(configImageBitmap(messageImage.getImageFile()));
 
         messageInfo.setMessageImage(messageImage);
         messageAdapter.addData(messageInfo);
+
+        //简单模拟一下网络请求的过程 ，这样写线程不规范，容易导致内测泄漏
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    //模拟延迟2秒接受到消息
+                    Message message = new Message();
+                    message.obj = messageInfo;
+                    //what=1,消息发送成功，消息发送失败
+                    msgWhat++;
+                    if (msgWhat % 2 == 0) {
+                        message.what = 1;
+                    } else {
+                        message.what = 2;
+                    }
+                    mHandler.sendMessage(message);
+
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 
     /**
@@ -393,4 +481,5 @@ public class ChatActivity extends AppCompatActivity implements
 
         return new File(BitmapUtil.saveBitmap(this, bitmap));
     }
+
 }

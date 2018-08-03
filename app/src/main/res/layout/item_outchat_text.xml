@@ -1,24 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="right|center_vertical"
     android:padding="@dimen/dp_10">
 
-    <com.github.library.bubbleview.BubbleTextVew xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <com.github.library.bubbleview.BubbleTextVew xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/tv_out_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
         android:layout_toLeftOf="@+id/iv"
         android:gravity="left|center_vertical"
-        android:minHeight="40dp"
-        android:paddingBottom="6dp"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        android:paddingTop="6dp"
-        android:text="；阿斯顿发生的发生的发阿斯顿发生的发生的发生的发生的发生"
+        android:maxWidth="250dp"
+        android:padding="8dp"
+        android:minHeight="43dp"
+        android:text="的发生的发生的发生的发生"
         android:textColor="@color/black"
         android:textSize="@dimen/sp_16"
         app:angle="4dp"
@@ -30,16 +27,20 @@
 
     <ImageView
         android:id="@+id/ivMessageState"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher_round" />
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@+id/tv_out_text"
+        android:src="@drawable/loadingerror"
+        tools:ignore="ContentDescription,RtlHardcoded" />
 
     <ImageView
         android:id="@+id/iv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:layout_alignParentRight="true"
-        android:src="@mipmap/ic_launcher_round" />
+        android:src="@mipmap/ic_launcher_round"
+        tools:ignore="ContentDescription,RtlHardcoded" />
 
 </RelativeLayout>
 
